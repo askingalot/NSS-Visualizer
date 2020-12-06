@@ -12,7 +12,7 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   parserOptions: {
     project: "tsconfig.json",
-    sourceType: "module",
+    sourceType: "module"
   },
   plugins: [
     "@typescript-eslint",
@@ -33,7 +33,9 @@ module.exports = {
     eqeqeq: ["warn", "always"],
     "import/no-deprecated": "warn",
     "import/no-extraneous-dependencies": "error",
-    "import/no-unassigned-import": "warn",
+    "import/no-unassigned-import": ["error", {
+      "allow": ["**/*.css"]
+    }],
     "no-cond-assign": "error",
     "no-duplicate-case": "error",
     "no-duplicate-imports": "error",
