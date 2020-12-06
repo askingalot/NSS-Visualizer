@@ -1,24 +1,43 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {Map} from './types';
+import {MapList} from './components/MapList';
 
 function App() {
+  const maps: Map[] = [
+    {
+      id: 'adfadf',
+      title: 'A map',
+      description: 'A longish description of a map',
+      author: null,
+      link: new URL('http://www.system76.com'),
+      createdBy: 'andy',
+      createdDateTime: new Date(),
+      updatedBy: 'andy',
+      updatedDateTime: new Date()
+    },
+    {
+      id: 'sadfiei',
+      title: 'A second map',
+      description: 'An even longer description of a second map',
+      author: null,
+      link: new URL('http://www.google.com'),
+      createdBy: 'andy',
+      createdDateTime: new Date(),
+      updatedBy: 'andy',
+      updatedDateTime: new Date()
+    }
+  ];
+
+  const user = {name: 'andy'};
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app'>
+      <header className='header'></header>
+      <main>
+        <MapList maps={maps} user={user}></MapList>
+      </main>
+      <footer className='footer'></footer>
     </div>
   );
 }

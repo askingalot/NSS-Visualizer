@@ -1,0 +1,7 @@
+{
+  "cSpell.words": ["Firestore", "eqeqeq"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "prettier.trailingComma": "none"
+}

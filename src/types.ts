@@ -20,3 +20,12 @@ export interface Map extends Auditable {
   author: null;
   link: URL;
 }
+
+export interface User {
+  name: string;
+}
+
+export interface MapListProps {
+  maps: Map[];
+  user: User;
+}
