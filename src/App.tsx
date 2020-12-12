@@ -9,7 +9,6 @@ function App() {
   const [maps, setMaps] = useState([] as Map[]);
 
   useEffect(() => {
-    debugger;
     db.onMapsChanged(setMaps);
   }, []);
   /*
