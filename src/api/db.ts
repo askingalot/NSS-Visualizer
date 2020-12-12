@@ -32,25 +32,34 @@ export default {
   onMapsChanged(observer: (maps: Map[]) => void) {
     const db = firebase.firestore();
 
-    db.collection('maps').onSnapshot((mapsCollection) => {
-      const maps: Map[] = [];
+    db.collection('maps').onSnapshot(async (mapsCollection) => {
+      const mapPromises: Promise<Map>[] = [];
 
       mapsCollection.forEach((mapDoc) => {
-        const map = mapDoc.data();
+        mapPromises.push(
+          (async function () {
+            const map = mapDoc.data();
+            const author = (await db.doc(map.author.path).get()).data() ?? {
+              firstName: '',
+              lastName: ''
+            };
 
-        maps.push({
-          id: mapDoc.id,
-          title: map.title,
-          description: map.descripiton,
-          link: new URL(map.link),
-          author: null,
-          createdDateTime: map.createdDateTime,
-          createdBy: map.createdBy,
-          updatedDateTime: map.updatedDateTime,
-          updatedBy: map.updatedBy
-        });
+            return {
+              id: mapDoc.id,
+              title: map.title,
+              description: map.description,
+              link: new URL(map.link),
+              author: `${author.firstName} ${author.lastName}`,
+              createdDateTime: map.createdDateTime,
+              createdBy: map.createdBy,
+              updatedDateTime: map.updatedDateTime,
+              updatedBy: map.updatedBy
+            };
+          })()
+        );
       });
 
+      const maps = await Promise.all(mapPromises);
       observer(maps);
     });
   }
