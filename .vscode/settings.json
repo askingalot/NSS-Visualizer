@@ -3,5 +3,6 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "prettier.trailingComma": "none"
+"prettier.trailingComma": "none",
+"typescript.tsdk": "node_modules/typescript/lib"
 }

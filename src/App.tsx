@@ -1,9 +1,18 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
-import {Map} from './types';
+import {Author, Map} from './types';
 import {MapList} from './components/MapList';
+import db from './api/db';
 
 function App() {
+  const [authors, setAuthors] = useState([] as Author[]);
+  const [maps, setMaps] = useState([] as Map[]);
+
+  useEffect(() => {
+    debugger;
+    db.onMapsChanged(setMaps);
+  }, []);
+  /*
   const maps: Map[] = [
     {
       id: 'adfadf',
@@ -28,6 +37,7 @@ function App() {
       updatedDateTime: new Date()
     }
   ];
+  */
 
   const user = {name: 'andy'};
 

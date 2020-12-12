@@ -34,7 +34,7 @@ module.exports = {
     "import/no-deprecated": "warn",
     "import/no-extraneous-dependencies": "error",
     "import/no-unassigned-import": ["error", {
-      "allow": ["**/*.css"]
+      "allow": ["**/*.css", "firebase/*"]
     }],
     "no-cond-assign": "error",
     "no-duplicate-case": "error",
