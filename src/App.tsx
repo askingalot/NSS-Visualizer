@@ -10,6 +10,7 @@ function App() {
   const [maps, setMaps] = useState([] as Map[]);
 
   useEffect(() => {
+    db.onAuthorsChanged(setAuthors);
     db.onMapsChanged(setMaps);
   }, []);
   const user = { name: 'andy' };
@@ -19,7 +20,7 @@ function App() {
     <div className='app'>
       <header className='header'></header>
       <main>
-        <MapForm saveMap={saveMap} />
+        <MapForm authors={authors} saveMap={saveMap} />
         <MapList maps={maps} user={user}></MapList>
       </main>
       <footer className='footer'></footer>

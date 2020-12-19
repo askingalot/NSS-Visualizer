@@ -1,9 +1,9 @@
-import {ChangeEvent, useState} from 'react';
-import {Map} from '../types';
-import {Form, Input, TextArea, Button, Select} from 'semantic-ui-react';
-import {toUrl} from '../utils';
+import { ChangeEvent, useState } from 'react';
+import { MapFormProps } from '../types';
+import { Form, Input, TextArea, Button, Select } from 'semantic-ui-react';
+import { toUrl } from '../utils';
 
-export function MapForm({saveMap}: {saveMap: (m: Map) => void}) {
+export function MapForm({ saveMap, authors }: MapFormProps) {
   const [map, setMap] = useState({
     title: '',
     description: '',
@@ -11,18 +11,11 @@ export function MapForm({saveMap}: {saveMap: (m: Map) => void}) {
     link: ''
   });
 
-  const authorOptions = [
-    {
-      key: 'YL3Zdw3JJpMu25MyFTqd',
-      value: 'YL3Zdw3JJpMu25MyFTqd',
-      text: 'Test Testerson'
-    },
-    {
-      key: 'n589SNwnSjIcaOnjimyH',
-      value: 'n589SNwnSjIcaOnjimyH',
-      text: 'Bob Testerson'
-    }
-  ];
+  const authorOptions = authors.map(a => ({
+    key: a.id,
+    value: a.id,
+    text: `${a.firstName} ${a.lastName}`
+  }));
 
   const submitForm = () => {
     saveMap({
@@ -65,10 +58,10 @@ export function MapForm({saveMap}: {saveMap: (m: Map) => void}) {
       <Form.Field
         control={Select}
         options={authorOptions}
-        label={{children: 'Author', htmlFor: 'author'}}
+        label={{ children: 'Author', htmlFor: 'author' }}
         placeholder='Author'
         search
-        searchInput={{id: 'author'}}
+        searchInput={{ id: 'author' }}
         onChange={onInputChange}
       />
       <Form.Field

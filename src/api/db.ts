@@ -5,29 +5,25 @@ import { Author, Map } from '../types';
 export default {
   onAuthorsChanged(observer: (authors: Author[]) => void) {
     const db = firebase.firestore();
-    db.collection('authors').onSnapshot((authorsCollection) => {
-      const authors: Author[] = [];
-
-      authorsCollection.forEach((authorDoc) => {
-        const author = authorDoc.data();
-
-        authors.push({
-          id: authorDoc.id,
-          firstName: author.firstName,
-          lastName: author.lastName,
-          cohort: author.cohort,
-          website: author.website ? new URL(author.website) : null,
-          createdDateTime: author.createdDateTime,
-          createdBy: author.createdBy,
-          updatedDateTime: author.updatedDateTime,
-          updatedBy: author.updatedBy
-        });
-      });
-
-      observer(authors);
+    db.collection('authors').onSnapshot(async (authorsCollection) => {
+      observer(
+        authorsCollection.docs.map(authorDoc => {
+          const author = authorDoc.data();
+          return {
+            id: authorDoc.id,
+            firstName: author.firstName,
+            lastName: author.lastName,
+            cohort: author.cohort,
+            website: author.website ? new URL(author.website) : null,
+            createdDateTime: author.createdDateTime,
+            createdBy: author.createdBy,
+            updatedDateTime: author.updatedDateTime,
+            updatedBy: author.updatedBy
+          };
+        })
+      );
     });
   },
-
   onMapsChanged(observer: (maps: Map[]) => void) {
     const db = firebase.firestore();
     db.collection('maps').onSnapshot(async (mapsCollection) => {

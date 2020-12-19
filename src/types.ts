@@ -30,3 +30,8 @@ export interface MapListProps {
   maps: Map[];
   user: User;
 }
+
+export interface MapFormProps {
+  saveMap: (m: Map) => void;
+  authors: Author[];
+}
