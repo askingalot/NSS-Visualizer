@@ -4,6 +4,7 @@ import { Author, Map } from './types';
 import { MapList } from './components/MapList';
 import db from './api/db';
 import { MapForm } from './components/MapForm';
+import { Container } from 'semantic-ui-react';
 
 function App() {
   const [authors, setAuthors] = useState([] as Author[]);
@@ -17,14 +18,14 @@ function App() {
   const saveMap = (m: Map) => console.log(m);
 
   return (
-    <div className='app'>
+    <Container>
       <header className='header'></header>
       <main>
         <MapForm authors={authors} saveMap={saveMap} />
         <MapList maps={maps} user={user}></MapList>
       </main>
       <footer className='footer'></footer>
-    </div>
+    </Container>
   );
 }
 

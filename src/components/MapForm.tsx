@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react';
-import { MapFormProps } from '../types';
+import { Map, MapFormProps } from '../types';
 import { Form, Input, TextArea, Button, Select } from 'semantic-ui-react';
 import { toUrl } from '../utils';
 
