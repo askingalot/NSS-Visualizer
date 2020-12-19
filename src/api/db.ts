@@ -2,10 +2,10 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import {Author, Map} from '../types';
 
+const db = firebase.firestore();
+
 export default {
   onAuthorsChanged(observer: (authors: Author[]) => void) {
-    const db = firebase.firestore();
-
     db.collection('authors').onSnapshot((authorsCollection) => {
       const authors: Author[] = [];
 
@@ -30,8 +30,6 @@ export default {
   },
 
   onMapsChanged(observer: (maps: Map[]) => void) {
-    const db = firebase.firestore();
-
     db.collection('maps').onSnapshot(async (mapsCollection) => {
       const mapPromises: Promise<Map>[] = [];
 
@@ -62,5 +60,7 @@ export default {
       const maps = await Promise.all(mapPromises);
       observer(maps);
     });
+  },
+  addMap(map: Map) {
   }
 };
