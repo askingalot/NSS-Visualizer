@@ -5,7 +5,7 @@ export function MapCard({map}: {map: Map}) {
     <section className='map-card'>
       <header className='map-card__title'>{map.title}</header>
       <div className='map-card__description'>{map.description}</div>
-      <div className='map-card__author'>{map.author}</div>
+      <div className='map-card__author'>{map.authorName}</div>
       <a className='map-card__link' target='_new' href={map.link.href}>
         {map.link.href}
       </a>

@@ -17,7 +17,8 @@ export interface Map extends Auditable {
   id: string;
   title: string;
   description: string;
-  author: string;
+  authorName: string;
+  authorId: string;
   link: URL;
 }
 

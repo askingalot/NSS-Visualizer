@@ -7,7 +7,7 @@ export function MapForm({saveMap}: {saveMap: (m: Map) => void}) {
   const [map, setMap] = useState({
     title: '',
     description: '',
-    author: '',
+    authorId: '',
     link: ''
   });
 
@@ -29,7 +29,8 @@ export function MapForm({saveMap}: {saveMap: (m: Map) => void}) {
       id: '',
       title: map.title,
       description: map.description,
-      author: map.author,
+      authorId: map.authorId,
+      authorName: authorOptions.find(ao => ao.key === map.authorId)?.text ?? "unknown",
       link: toUrl(map.link),
       createdBy: 'Andy',
       updatedBy: 'Andy',

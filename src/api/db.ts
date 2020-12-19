@@ -1,11 +1,10 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import {Author, Map} from '../types';
-
-const db = firebase.firestore();
+import { Author, Map } from '../types';
 
 export default {
   onAuthorsChanged(observer: (authors: Author[]) => void) {
+    const db = firebase.firestore();
     db.collection('authors').onSnapshot((authorsCollection) => {
       const authors: Author[] = [];
 
@@ -30,37 +29,28 @@ export default {
   },
 
   onMapsChanged(observer: (maps: Map[]) => void) {
+    const db = firebase.firestore();
     db.collection('maps').onSnapshot(async (mapsCollection) => {
-      const mapPromises: Promise<Map>[] = [];
-
-      mapsCollection.forEach((mapDoc) => {
-        mapPromises.push(
-          (async function () {
-            const map = mapDoc.data();
-            const author = (await db.doc(map.author.path).get()).data() ?? {
-              firstName: '',
-              lastName: ''
-            };
-
-            return {
-              id: mapDoc.id,
-              title: map.title,
-              description: map.description,
-              link: new URL(map.link),
-              author: `${author.firstName} ${author.lastName}`,
-              createdDateTime: map.createdDateTime,
-              createdBy: map.createdBy,
-              updatedDateTime: map.updatedDateTime,
-              updatedBy: map.updatedBy
-            };
-          })()
-        );
-      });
-
-      const maps = await Promise.all(mapPromises);
-      observer(maps);
+      observer(
+        mapsCollection.docs.map(mapDoc => {
+          const map = mapDoc.data();
+          return {
+            id: mapDoc.id,
+            title: map.title,
+            description: map.description,
+            link: new URL(map.link),
+            authorName: map.authorName,
+            authorId: map.authorId,
+            createdDateTime: map.createdDateTime,
+            createdBy: map.createdBy,
+            updatedDateTime: map.updatedDateTime,
+            updatedBy: map.updatedBy
+          };
+        })
+      );
     });
   },
   addMap(map: Map) {
+    return;
   }
 };

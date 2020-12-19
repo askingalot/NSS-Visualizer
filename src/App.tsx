@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
-import {Author, Map} from './types';
-import {MapList} from './components/MapList';
+import { Author, Map } from './types';
+import { MapList } from './components/MapList';
 import db from './api/db';
-import {MapForm} from './components/MapForm';
+import { MapForm } from './components/MapForm';
 
 function App() {
   const [authors, setAuthors] = useState([] as Author[]);
@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     db.onMapsChanged(setMaps);
   }, []);
-  const user = {name: 'andy'};
+  const user = { name: 'andy' };
   const saveMap = (m: Map) => console.log(m);
 
   return (
