@@ -1,6 +1,6 @@
-.app {
+body {
+  background-color:slategrey;
 }
-
 .header {
   background-color: #282c34;
   display: flex;
