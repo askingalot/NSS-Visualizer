@@ -1,9 +1,12 @@
 import { ChangeEvent, useState } from 'react';
-import { Map, MapFormProps } from '../types';
+import { useHistory } from 'react-router-dom';
+import { MapFormProps } from '../types';
 import { Form, Input, TextArea, Button, Select } from 'semantic-ui-react';
 import { toUrl } from '../utils';
 
 export function MapForm({ saveMap, authors }: MapFormProps) {
+  const history = useHistory();
+
   const [map, setMap] = useState({
     title: '',
     description: '',
@@ -18,7 +21,7 @@ export function MapForm({ saveMap, authors }: MapFormProps) {
   }));
 
   const submitForm = () => {
-    const mapToSave = {
+    return saveMap({
       id: '',
       title: map.title,
       description: map.description,
@@ -29,8 +32,8 @@ export function MapForm({ saveMap, authors }: MapFormProps) {
       updatedBy: 'Andy',
       createdDateTime: new Date(),
       updatedDateTime: new Date()
-    };
-    saveMap(mapToSave);
+    })
+    .then(() => history.push("/"));
   };
 
   const onInputChange = (evt: ChangeEvent<HTMLInputElement>, target: any) => {
@@ -79,7 +82,7 @@ export function MapForm({ saveMap, authors }: MapFormProps) {
         id='save'
         control={Button}
         content='Save'
-        onClick={() => submitForm()}
+        onClick={submitForm}
       />
     </Form>
   );

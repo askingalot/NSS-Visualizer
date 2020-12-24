@@ -5,6 +5,10 @@ import { MapList } from './components/MapList';
 import db from './api/db';
 import { MapForm } from './components/MapForm';
 import { Container } from 'semantic-ui-react';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { Nav } from './components/Nav';
+import { AuthorList } from './components/AuthorList';
+import { AuthorForm } from './components/AuthorForm';
 
 function App() {
   const [authors, setAuthors] = useState([] as Author[]);
@@ -17,14 +21,31 @@ function App() {
   const user = { name: 'andy' };
 
   return (
-    <Container>
-      <header className='header'></header>
-      <main>
-        <MapForm authors={authors} saveMap={db.addMap} />
-        <MapList maps={maps} user={user}></MapList>
-      </main>
-      <footer className='footer'></footer>
-    </Container>
+    <Router>
+      <Nav />
+      <Container>
+        <main>
+          <Switch>
+            {["/", "/maps"].map(path =>
+              <Route path={path} exact>
+                <MapList maps={maps}></MapList>
+              </Route>
+            )}
+            <Route path="/maps/add">
+              <MapForm authors={authors} saveMap={db.addMap} />
+            </Route>
+            <Route path="/authors" exact>
+              <AuthorList authors={authors}></AuthorList>
+            </Route>
+            <Route path="/authors/add">
+              <AuthorForm saveAuthor={db.addAuthor} />
+            </Route>
+            <Redirect to="/" />
+          </Switch>
+        </main>
+        <footer className='footer'></footer>
+      </Container>
+    </Router>
   );
 }
 

@@ -1,13 +1,15 @@
-import {MapListProps} from '../types';
+import { Card } from 'semantic-ui-react';
+import { MapListProps } from '../types';
 import { MapCard } from './MapCard';
 
-export function MapList({maps, user}: MapListProps) {
+export function MapList({ maps }: MapListProps) {
   return (
-    <article className="map-list">
-      <div>You are: {user.name}</div>
-      {maps.map((m) => (
-        <MapCard key={m.id} map={m}/>
-      ))}
-    </article>
+    <>
+      <Card.Group itemsPerRow={2} centered>
+        {maps.map((m) => (
+          <MapCard key={m.id} map={m} />
+        ))}
+      </Card.Group>
+    </>
   );
 }

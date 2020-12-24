@@ -24,6 +24,17 @@ export default {
       );
     });
   },
+  async addAuthor(author: Author) {
+    try {
+      const db = firebase.firestore();
+      await db
+        .collection('authors')
+        .add({ ...author, website: author.website?.href ?? null });
+    } catch (error) {
+      console.log({ error });
+      alert("Something went wrong. Author is not saved.");
+    }
+  },
   onMapsChanged(observer: (maps: Map[]) => void) {
     const db = firebase.firestore();
     db.collection('maps').onSnapshot(async (mapsCollection) => {
@@ -49,9 +60,9 @@ export default {
   async addMap(map: Map) {
     try {
       const db = firebase.firestore();
-      await db.collection('maps').add({...map, link: map.link.href});
+      await db.collection('maps').add({ ...map, link: map.link.href });
     } catch (error) {
-      console.log({error});
+      console.log({ error });
       alert("Something went wrong. Map is not saved.");
     }
   }

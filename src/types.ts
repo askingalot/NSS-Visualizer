@@ -5,7 +5,7 @@ interface Auditable {
   updatedBy: string;
 }
 
-export interface Author extends Auditable {
+export type Author = Auditable & {
   id: string;
   firstName: string;
   lastName: string;
@@ -28,10 +28,18 @@ export interface User {
 
 export interface MapListProps {
   maps: Map[];
-  user: User;
 }
 
 export interface MapFormProps {
-  saveMap: (m: Map) => void;
+  saveMap: (m: Map) => Promise<void>;
   authors: Author[];
 }
+
+export interface AuthorListProps {
+  authors: Author[];
+}
+
+export interface AuthorFormProps {
+  saveAuthor: (a: Author) => Promise<void>;
+}
+

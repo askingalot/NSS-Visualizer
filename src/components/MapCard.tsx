@@ -1,14 +1,14 @@
-import {Map} from '../types';
+import { Card } from 'semantic-ui-react';
+import { Map } from '../types';
 
-export function MapCard({map}: {map: Map}) {
+export function MapCard({ map }: { map: Map }) {
   return (
-    <section className='map-card'>
-      <header className='map-card__title'>{map.title}</header>
-      <div className='map-card__description'>{map.description}</div>
-      <div className='map-card__author'>{map.authorName}</div>
-      <a className='map-card__link' target='_new' href={map.link.href}>
-        {map.link.href}
-      </a>
-    </section>
+    <Card
+      header={map.title}
+      meta={map.authorName}
+      description={map.description}
+      href={map.link.href}
+      target="_new"
+    />
   );
 }
