@@ -35,7 +35,7 @@ _Each record should contain..._
 
 ---
 
-List all maps.
+~~List all maps.~~
 
 > **Notes:**  
 > only meta data  
@@ -44,7 +44,7 @@ List all maps.
 
 ---
 
-Clicking on the link displays the map in a new tab
+~~Clicking on the link displays the map in a new tab~~
 
 ---
 
@@ -64,12 +64,11 @@ Logged in users can edit an author
 
 ---
 
-Add a new map
+~~Add a new map~~
 
 > **Notes:**  
 > only meta data  
 > include the link to a map, but don't upload a file yet  
-> Only logged in users
 
 _Data to collect:_
 
@@ -85,12 +84,23 @@ _Data to collect:_
 
 ---
 
+Routing
+
+* List Maps
+* List Authors
+* List Maps by Author
+* Add Map
+* Edit Map
+* Add Author
+* Edit Author
+
+---
+
 Delete a map
 
 > **Notes:**  
 > only meta data  
 > no files have been uploaded yet
-> Only logged in users
 
 ---
 
@@ -99,7 +109,18 @@ Update a map
 > **Notes:**  
 > only meta data  
 > no files have been uploaded yet
-> Only logged in users
+
+---
+
+Restrict CUD actions to logged in users
+
+---
+
+Accurately record created by / updated by users for maps
+
+---
+
+Accurately record created by / updated by users for authors
 
 ---
 
