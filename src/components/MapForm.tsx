@@ -18,7 +18,7 @@ export function MapForm({ saveMap, authors }: MapFormProps) {
   }));
 
   const submitForm = () => {
-    saveMap({
+    const mapToSave = {
       id: '',
       title: map.title,
       description: map.description,
@@ -29,13 +29,14 @@ export function MapForm({ saveMap, authors }: MapFormProps) {
       updatedBy: 'Andy',
       createdDateTime: new Date(),
       updatedDateTime: new Date()
-    });
+    };
+    saveMap(mapToSave);
   };
 
-  const onInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
+  const onInputChange = (evt: ChangeEvent<HTMLInputElement>, target: any) => {
     setMap({
       ...map,
-      [evt.target.id]: evt.target.value
+      [target.id]: target.value
     });
   };
 
@@ -47,6 +48,7 @@ export function MapForm({ saveMap, authors }: MapFormProps) {
         label='Title'
         placeholder='Title'
         onChange={onInputChange}
+        autoFocus
       />
       <Form.Field
         id='description'
@@ -56,6 +58,7 @@ export function MapForm({ saveMap, authors }: MapFormProps) {
         onChange={onInputChange}
       />
       <Form.Field
+        id="authorId"
         control={Select}
         options={authorOptions}
         label={{ children: 'Author', htmlFor: 'author' }}

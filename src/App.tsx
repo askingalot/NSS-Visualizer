@@ -15,13 +15,12 @@ function App() {
     db.onMapsChanged(setMaps);
   }, []);
   const user = { name: 'andy' };
-  const saveMap = (m: Map) => console.log(m);
 
   return (
     <Container>
       <header className='header'></header>
       <main>
-        <MapForm authors={authors} saveMap={saveMap} />
+        <MapForm authors={authors} saveMap={db.addMap} />
         <MapList maps={maps} user={user}></MapList>
       </main>
       <footer className='footer'></footer>

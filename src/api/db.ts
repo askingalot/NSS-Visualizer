@@ -46,7 +46,13 @@ export default {
       );
     });
   },
-  addMap(map: Map) {
-    return;
+  async addMap(map: Map) {
+    try {
+      const db = firebase.firestore();
+      await db.collection('maps').add({...map, link: map.link.href});
+    } catch (error) {
+      console.log({error});
+      alert("Something went wrong. Map is not saved.");
+    }
   }
 };
