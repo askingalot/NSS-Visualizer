@@ -65,5 +65,14 @@ export default {
       console.log({ error });
       alert("Something went wrong. Map is not saved.");
     }
+  },
+  async deleteMap(id: string) {
+    try {
+      const db = firebase.firestore();
+      await db.collection('maps').doc(id).delete()
+    } catch (error) {
+      console.log({ error });
+      alert("Something went wrong. Map is not deleted.");
+    }
   }
 };

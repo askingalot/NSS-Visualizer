@@ -28,6 +28,12 @@ export interface User {
 
 export interface MapListProps {
   maps: Map[];
+  deleteMap: (id: string) => Promise<void>;
+}
+
+export interface MapCardProps {
+  map: Map;
+  deleteMap: (id: string) => Promise<void>;
 }
 
 export interface MapFormProps {

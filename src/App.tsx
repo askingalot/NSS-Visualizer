@@ -27,8 +27,8 @@ function App() {
         <main>
           <Switch>
             {["/", "/maps"].map(path =>
-              <Route path={path} exact>
-                <MapList maps={maps}></MapList>
+              <Route key={path} path={path} exact>
+                <MapList maps={maps} deleteMap={db.deleteMap}/>
               </Route>
             )}
             <Route path="/maps/add">
