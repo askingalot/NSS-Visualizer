@@ -43,9 +43,14 @@ export interface MapFormProps {
 
 export interface AuthorListProps {
   authors: Author[];
+  deleteAuthor: (id: string) => Promise<void>;
+}
+
+export interface AuthorCardProps {
+  author: Author;
+  deleteAuthor: (id: string) => Promise<void>;
 }
 
 export interface AuthorFormProps {
   saveAuthor: (a: Author) => Promise<void>;
 }
-

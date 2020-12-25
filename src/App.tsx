@@ -35,7 +35,7 @@ function App() {
               <MapForm authors={authors} saveMap={db.addMap} />
             </Route>
             <Route path="/authors" exact>
-              <AuthorList authors={authors}></AuthorList>
+              <AuthorList authors={authors} deleteAuthor={db.deleteAuthor}/>
             </Route>
             <Route path="/authors/add">
               <AuthorForm saveAuthor={db.addAuthor} />

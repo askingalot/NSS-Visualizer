@@ -35,6 +35,25 @@ export default {
       alert("Something went wrong. Author is not saved.");
     }
   },
+  async deleteAuthor(id: string) {
+    try {
+      const db = firebase.firestore();
+      const batch = db.batch();
+
+      const authorRef = db.collection('authors').doc(id);
+      const mapsForAuthor = await db.collection('maps').where('authorId', '==', id).get();
+      const mapRefs = mapsForAuthor.docs.map(mapDoc => mapDoc.ref);
+
+      for (const ref of [...mapRefs, authorRef]) {
+        batch.delete(ref);
+      }
+
+      await batch.commit();
+    } catch (error) {
+      console.log({ error });
+      alert("Something went wrong. Author is not deleted.");
+    }
+  },
   onMapsChanged(observer: (maps: Map[]) => void) {
     const db = firebase.firestore();
     db.collection('maps').onSnapshot(async (mapsCollection) => {
