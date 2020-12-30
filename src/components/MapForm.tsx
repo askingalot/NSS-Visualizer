@@ -14,6 +14,8 @@ export function MapForm({ saveMap, authors }: MapFormProps) {
     link: ''
   });
 
+  const [file, setFile] = useState(undefined as (File | undefined))
+
   const authorOptions = authors.map(a => ({
     key: a.id,
     value: a.id,
@@ -31,16 +33,21 @@ export function MapForm({ saveMap, authors }: MapFormProps) {
       createdBy: 'Andy',
       updatedBy: 'Andy',
       createdDateTime: new Date(),
-      updatedDateTime: new Date()
+      updatedDateTime: new Date(),
+      file: file
     })
-    .then(() => history.push("/"));
+      .then(() => history.push("/"));
   };
 
-  const onInputChange = (evt: ChangeEvent<HTMLInputElement>, target: any) => {
+  const onInputChange = (_: ChangeEvent<HTMLInputElement>, target: { id: string, value: string }) => {
     setMap({
       ...map,
       [target.id]: target.value
     });
+  };
+
+  const onFileInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    setFile(evt.target.files?.item(0) ?? undefined);
   };
 
   return (
@@ -77,6 +84,14 @@ export function MapForm({ saveMap, authors }: MapFormProps) {
         label='Link'
         placeholder='Link'
         onChange={onInputChange}
+      />
+      <Form.Field
+        id='file'
+        control={Input}
+        type='file'
+        label='File'
+        placeholder='File'
+        onChange={onFileInputChange}
       />
       <Form.Field
         id='save'

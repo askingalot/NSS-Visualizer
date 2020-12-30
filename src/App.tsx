@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-d
 import { Nav } from './components/Nav';
 import { AuthorList } from './components/AuthorList';
 import { AuthorForm } from './components/AuthorForm';
+import { storage } from './api/storage';
 
 function App() {
   const [authors, setAuthors] = useState([] as Author[]);
@@ -19,6 +20,14 @@ function App() {
     db.onMapsChanged(setMaps);
   }, []);
   const user = { name: 'andy' };
+
+  const saveMap = async (map: Map) => {
+    if (map.file) {
+      await storage.uploadMap(map.file)
+    }
+    delete map.file;
+    await db.addMap(map);
+  }
 
   return (
     <Router>
@@ -32,7 +41,7 @@ function App() {
               </Route>
             )}
             <Route path="/maps/add">
-              <MapForm authors={authors} saveMap={db.addMap} />
+              <MapForm authors={authors} saveMap={saveMap} />
             </Route>
             <Route path="/authors" exact>
               <AuthorList authors={authors} deleteAuthor={db.deleteAuthor}/>

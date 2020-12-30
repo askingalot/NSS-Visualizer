@@ -20,6 +20,7 @@ export interface Map extends Auditable {
   authorName: string;
   authorId: string;
   link: URL;
+  file?: File;
 }
 
 export interface User {
