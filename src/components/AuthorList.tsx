@@ -1,5 +1,5 @@
 import { Card } from 'semantic-ui-react';
-import { AuthorListProps } from '../types';
+import { AuthorListProps } from '../types/types';
 import { AuthorCard } from './AuthorCard';
 
 export function AuthorList({ authors, deleteAuthor }: AuthorListProps) {

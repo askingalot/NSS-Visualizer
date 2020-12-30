@@ -1,5 +1,5 @@
 import { Card } from 'semantic-ui-react';
-import { MapListProps } from '../types';
+import { MapListProps } from '../types/types';
 import { MapCard } from './MapCard';
 
 export function MapList({ maps, deleteMap }: MapListProps) {

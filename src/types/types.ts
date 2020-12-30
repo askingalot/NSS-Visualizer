@@ -1,9 +1,5 @@
-interface Auditable {
-  createdDateTime: Date;
-  createdBy: string;
-  updatedDateTime: Date;
-  updatedBy: string;
-}
+import { Auditable } from './baseTypes';
+import { AddableMap, DisplayableMap } from './mapTypes';
 
 export type Author = Auditable & {
   id: string;
@@ -13,32 +9,22 @@ export type Author = Auditable & {
   website: URL | null;
 }
 
-export interface Map extends Auditable {
-  id: string;
-  title: string;
-  description: string;
-  authorName: string;
-  authorId: string;
-  link: URL;
-  file?: File;
-}
-
 export interface User {
   name: string;
 }
 
 export interface MapListProps {
-  maps: Map[];
+  maps: DisplayableMap[];
   deleteMap: (id: string) => Promise<void>;
 }
 
 export interface MapCardProps {
-  map: Map;
+  map: DisplayableMap;
   deleteMap: (id: string) => Promise<void>;
 }
 
 export interface MapFormProps {
-  saveMap: (m: Map) => Promise<void>;
+  saveMap: (m: AddableMap) => Promise<void>;
   authors: Author[];
 }
 

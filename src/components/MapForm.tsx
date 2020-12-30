@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { MapFormProps } from '../types';
+import { MapFormProps } from '../types/types';
 import { Form, Input, TextArea, Button, Select } from 'semantic-ui-react';
 import { toUrl } from '../utils';
 
@@ -10,8 +10,7 @@ export function MapForm({ saveMap, authors }: MapFormProps) {
   const [map, setMap] = useState({
     title: '',
     description: '',
-    authorId: '',
-    link: ''
+    authorId: ''
   });
 
   const [file, setFile] = useState(undefined as (File | undefined))
@@ -24,17 +23,11 @@ export function MapForm({ saveMap, authors }: MapFormProps) {
 
   const submitForm = () => {
     return saveMap({
-      id: '',
       title: map.title,
       description: map.description,
       authorId: map.authorId,
       authorName: authorOptions.find(ao => ao.key === map.authorId)?.text ?? "unknown",
-      link: toUrl(map.link),
-      createdBy: 'Andy',
-      updatedBy: 'Andy',
-      createdDateTime: new Date(),
-      updatedDateTime: new Date(),
-      file: file
+      file: file!
     })
       .then(() => history.push("/"));
   };
@@ -75,14 +68,6 @@ export function MapForm({ saveMap, authors }: MapFormProps) {
         placeholder='Author'
         search
         searchInput={{ id: 'author' }}
-        onChange={onInputChange}
-      />
-      <Form.Field
-        id='link'
-        control={Input}
-        type='url'
-        label='Link'
-        placeholder='Link'
         onChange={onInputChange}
       />
       <Form.Field

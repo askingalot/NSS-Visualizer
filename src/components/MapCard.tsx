@@ -1,5 +1,5 @@
 import { Card, Button } from 'semantic-ui-react';
-import { MapCardProps } from '../types';
+import { MapCardProps } from '../types/types';
 
 export function MapCard({ map, deleteMap }: MapCardProps) {
   const deleteClick = async () => {

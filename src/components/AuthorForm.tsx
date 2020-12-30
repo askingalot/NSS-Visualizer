@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { AuthorFormProps } from '../types';
-import { Form, Input, TextArea, Button, Select } from 'semantic-ui-react';
+import { AuthorFormProps } from '../types/types';
+import { Form, Input, Button } from 'semantic-ui-react';
 import { toUrl } from '../utils';
 
 export function AuthorForm({ saveAuthor }: AuthorFormProps) {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { Author, Map } from './types';
+import { Author } from './types/types';
 import { MapList } from './components/MapList';
 import db from './api/db';
 import { MapForm } from './components/MapForm';
@@ -10,10 +10,11 @@ import { Nav } from './components/Nav';
 import { AuthorList } from './components/AuthorList';
 import { AuthorForm } from './components/AuthorForm';
 import { storage } from './api/storage';
+import { AddableMap, DisplayableMap } from './types/mapTypes';
 
 function App() {
   const [authors, setAuthors] = useState([] as Author[]);
-  const [maps, setMaps] = useState([] as Map[]);
+  const [maps, setMaps] = useState([] as DisplayableMap[]);
 
   useEffect(() => {
     db.onAuthorsChanged(setAuthors);
@@ -21,12 +22,9 @@ function App() {
   }, []);
   const user = { name: 'andy' };
 
-  const saveMap = async (map: Map) => {
-    if (map.file) {
-      await storage.uploadMap(map.file)
-    }
-    delete map.file;
-    await db.addMap(map);
+  const saveMap = async (map: AddableMap) => {
+    const link = await storage.uploadMap(map.file)
+    await db.addMap(map, link);
   }
 
   return (

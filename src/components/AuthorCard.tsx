@@ -1,5 +1,5 @@
 import { Button, Card } from 'semantic-ui-react';
-import { AuthorCardProps } from '../types';
+import { AuthorCardProps } from '../types/types';
 
 export function AuthorCard({ author, deleteAuthor }: AuthorCardProps) {
   const deleteClick = async () => {
