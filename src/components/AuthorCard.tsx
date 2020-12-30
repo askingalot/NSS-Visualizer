@@ -3,7 +3,9 @@ import { AuthorCardProps } from '../types/types';
 
 export function AuthorCard({ author, deleteAuthor }: AuthorCardProps) {
   const deleteClick = async () => {
-    await deleteAuthor(author.id);
+    if (confirm(`Are you sure you want to delete ${author.firstName} ${author.lastName} and all of their maps?`)) {
+      await deleteAuthor(author.id);
+    }
   };
 
   const editClicked = () => {
