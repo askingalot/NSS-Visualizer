@@ -86,17 +86,21 @@ _Data to collect:_
 
 Routing
 
-* List Maps
-* List Authors
+* ~~List Maps~~
+* ~~List Authors~~
 * List Maps by Author
-* Add Map
+* ~~Add Map~~
 * Edit Map
-* Add Author
+* ~~Add Author~~
 * Edit Author
 
 ---
 
-Delete a map
+~~Delete an author~~
+
+---
+
+~~Delete a map~~
 
 > **Notes:**  
 > only meta data  

@@ -5,7 +5,7 @@ import { AuthorCard } from './AuthorCard';
 export function AuthorList({ authors, deleteAuthor }: AuthorListProps) {
   return (
     <>
-      <Card.Group itemsPerRow={2} centered>
+      <Card.Group centered>
         {authors.map((a) => (
           <AuthorCard key={a.id} author={a} deleteAuthor={deleteAuthor} />
         ))}
